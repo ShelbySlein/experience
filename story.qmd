@@ -12,7 +12,7 @@ When evaluating collegiate volleyball attackers, raw kill totals often grab head
 ```{r}
 #| label: veteran-advantage-plot
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 4.5
 #| fig-align: center
 
 library(tidyverse)
@@ -43,7 +43,7 @@ ggplot(trends, aes(x = class_year, y = Percentage, color = Metric, group = Metri
     aes(label = paste0(round(Percentage, 1), "%")),
     vjust = ifelse(trends$Metric == "Kill Rate", -1.2, 1.8),
     fontface = "bold",
-    size = 4,
+    size = 3.8,
     show.legend = FALSE
   ) +
   scale_color_manual(values = c("Kill Rate" = "#1b7837", "Error Rate" = "#d73027")) +
@@ -60,10 +60,120 @@ ggplot(trends, aes(x = class_year, y = Percentage, color = Metric, group = Metri
   theme(
     legend.position = "top",
     panel.grid.minor = element_blank(),
-    plot.title = element_text(face = "bold", size = 15)
+    plot.title = element_text(face = "bold", size = 14)
   )
 ```
 
 The data reveals a steady, two-sided evolution. As attackers progress from their freshman to senior campaigns, their kill rate climbs monotonically from 34.5% to 36.9%. At the same time, their attack error rate declines each year, dropping from 16.4% down to 14.3%. Together, these compounding adjustments explain why seniors hit at an average efficiency of .226 compared to .181 for freshmen: veterans generate more offensive points while donating fewer errors.
 
-Collegiate experience transforms *how* hitters attack rather than merely how frequently they swing. Freshmen arriving from high school face Division 1 blockers who are bigger, faster, and better positioned, which often induces rushed swings into the net or out of bounds. By senior year, players have mastered shot selection—wiping balls off the block, tipping into soft spots on the floor, and avoiding low-percentage swings. The veteran advantage is fundamentally about poise and decision-making at the net.
+## Position Breakdown: Outside Hitters vs. Middle Blockers
+
+Not all hitting roles are created equal. Middle Blockers (MB) attack quick sets close to the setter, often facing single blockers, while Outside Hitters (OH) carry the burden of out-of-system "bailout" sets against formed double blocks. Does collegiate experience help both roles equally?
+
+```{r}
+#| label: position-comparison-plot
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-align: center
+
+pos_trends <- volleyball |>
+  filter(Yr %in% c("Fr", "So", "Jr", "Sr"), `Total Attacks` >= 100, Pos %in% c("OH", "MB")) |>
+  mutate(
+    class_year = factor(Yr, levels = c("Fr", "So", "Jr", "Sr"),
+                        labels = c("Freshman", "Sophomore", "Junior", "Senior")),
+    position_full = if_else(Pos == "OH", "Outside Hitters (OH)", "Middle Blockers (MB)")
+  ) |>
+  group_by(position_full, class_year) |>
+  summarize(
+    `Kill Rate` = mean(Kills / `Total Attacks`, na.rm = TRUE) * 100,
+    `Error Rate` = mean(Errors / `Total Attacks`, na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) |>
+  pivot_longer(
+    cols = c(`Kill Rate`, `Error Rate`),
+    names_to = "Metric",
+    values_to = "Percentage"
+  )
+
+ggplot(pos_trends, aes(x = class_year, y = Percentage, color = Metric, group = Metric)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  geom_text(
+    aes(label = paste0(round(Percentage, 1), "%")),
+    vjust = ifelse(pos_trends$Metric == "Kill Rate", -1.2, 1.8),
+    fontface = "bold",
+    size = 3.3,
+    show.legend = FALSE
+  ) +
+  facet_wrap(~position_full) +
+  scale_color_manual(values = c("Kill Rate" = "#1b7837", "Error Rate" = "#d73027")) +
+  scale_y_continuous(limits = c(10, 48), labels = \(x) paste0(x, "%")) +
+  labs(
+    title = "Veteran Improvement Across Playing Positions",
+    subtitle = "Comparing Outside Hitters (heavy out-of-system load) and Middle Blockers (quick attacks)",
+    x = "Class Standing",
+    y = "Percentage of Total Attacks",
+    color = NULL,
+    caption = "Source: NCAA Division 1 Volleyball Statistics"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(face = "bold", size = 12),
+    plot.title = element_text(face = "bold", size = 14)
+  )
+```
+
+The split shows that experience pays off differently depending on the role. Middle Blockers maintain high kill rates from day one (39.5% as freshmen) because of their physical height and set speed, yet they still trim errors down from 15.5% to 13.7%. Outside Hitters experience an even more noticeable transformation: their error rate drops by more than two full points (17.4% to 15.2%) while kill rates jump from 32.3% to 34.0%, demonstrating how seasoned pins learn to manage difficult balls.
+
+## Case Study: Marta Levinska (Arizona State)
+
+Aggregate statistics show broad patterns, but individual careers bring the trend to life. Marta Levinska arrived at Arizona State in 2020 as a high-potential international opposite/outside hitter. Over four consecutive seasons, her trajectory tracked the veteran curve with textbook precision.
+
+```{r}
+#| label: player-case-study
+#| fig-width: 8
+#| fig-height: 4.2
+#| fig-align: center
+
+marta <- volleyball |>
+  filter(Player == "Marta Levinska") |>
+  mutate(
+    class_year = factor(Yr, levels = c("Fr", "So", "Jr", "Sr"),
+                        labels = c("Freshman\n(2020-21)", "Sophomore\n(2021-22)", "Junior\n(2022-23)", "Senior\n(2023-24)")),
+    `Kill Rate` = (Kills / `Total Attacks`) * 100,
+    `Error Rate` = (Errors / `Total Attacks`) * 100
+  ) |>
+  select(class_year, `Kill Rate`, `Error Rate`) |>
+  pivot_longer(cols = c(`Kill Rate`, `Error Rate`), names_to = "Metric", values_to = "Percentage")
+
+ggplot(marta, aes(x = class_year, y = Percentage, color = Metric, group = Metric)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3.5) +
+  geom_text(
+    aes(label = paste0(round(Percentage, 1), "%")),
+    vjust = ifelse(marta$Metric == "Kill Rate", -1.2, 1.8),
+    fontface = "bold",
+    size = 3.6,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(values = c("Kill Rate" = "#1b7837", "Error Rate" = "#d73027")) +
+  scale_y_continuous(limits = c(5, 52), labels = \(x) paste0(x, "%")) +
+  labs(
+    title = "Four-Year Trajectory: Marta Levinska (Arizona State)",
+    subtitle = "Kill rate rose from 33.1% to 45.8% as hitting percentage climbed from .204 to .348",
+    x = "Season & Standing",
+    y = "Percentage of Total Attacks",
+    color = NULL,
+    caption = "Source: NCAA Division 1 Volleyball Statistics"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 14)
+  )
+```
+
+As a freshman, Levinska delivered a productive 245 kills with a .204 hitting percentage. By her senior campaign in 2023–24, she racked up 571 kills while pushing her kill rate to 45.8% and cutting her error rate to 11.0%—earning AVCA All-America honors and guiding Arizona State to the NCAA Sweet 16. Her growth exemplifies how collegiate attackers combine strength, shot selection, and court vision to dominate at the net.

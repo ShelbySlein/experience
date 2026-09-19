@@ -101,12 +101,132 @@ p_box <- ggplot(vb_clean, aes(x = class_year, y = points_s, fill = class_year)) 
 ggplotly(p_box)
 ```
 
-## Interactive Player Explorer
+## Interactive Player Comparison (Head-to-Head)
 
-Search, filter by conference, position, or team, and sort players across all statistical categories.
+Compare any two players side-by-side. Use the search bars in **Player 1** and **Player 2** below, then click any row in either table to update the comparison card instantly.
+
+```{=html}
+<div id="h2h-comparison" class="card shadow mb-4 border-primary">
+  <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center flex-wrap">
+    <span class="fw-bold fs-5">Head-to-Head Player Comparison</span>
+    <small class="badge bg-light text-primary">Click any row in Player 1 or Player 2 table below to update</small>
+  </div>
+  <div class="card-body">
+    <div class="row align-items-center mb-3">
+      <div class="col-md-5 text-center p-3 rounded bg-light border" id="card-p1">
+        <span class="badge bg-primary mb-1">Player 1</span>
+        <h4 id="p1-name" class="text-primary mb-1">Sarah Franklin</h4>
+        <p id="p1-meta" class="text-muted mb-0 small">Wisconsin (Big Ten) | Junior | OH | 2023-2024</p>
+      </div>
+      <div class="col-md-2 text-center my-2 my-md-0">
+        <span class="badge bg-danger fs-5 px-3 py-2 shadow-sm">VS</span>
+      </div>
+      <div class="col-md-5 text-center p-3 rounded bg-light border" id="card-p2">
+        <span class="badge bg-success mb-1">Player 2</span>
+        <h4 id="p2-name" class="text-success mb-1">Harper Murray</h4>
+        <p id="p2-meta" class="text-muted mb-0 small">Nebraska (Big Ten) | Freshman | OH | 2023-2024</p>
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-sm table-striped table-hover text-center align-middle mb-0" id="h2h-table">
+        <thead class="table-dark">
+          <tr>
+            <th class="text-start" style="width: 35%;">Stat Category</th>
+            <th id="h2h-th-p1" style="width: 25%;">Sarah Franklin</th>
+            <th id="h2h-th-p2" style="width: 25%;">Harper Murray</th>
+            <th style="width: 15%;">Leader</th>
+          </tr>
+        </thead>
+        <tbody id="h2h-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+window.p1Data = ["2023-2024", "Sarah Franklin", "Wisconsin", "Big Ten", "Junior", "OH", 117, 4.62, 4.15, 0.300, 1.93, 0.53, 0.18, 0.13];
+window.p2Data = ["2023-2024", "Harper Murray", "Nebraska", "Big Ten", "Freshman", "OH", 121, 3.82, 3.23, 0.237, 2.07, 0.54, 0.30, 0.37];
+
+function updateH2H() {
+  if (!window.p1Data || !window.p2Data) return;
+  
+  var p1El = document.getElementById('p1-name');
+  if (!p1El) return;
+  
+  p1El.innerText = window.p1Data[1];
+  document.getElementById('p1-meta').innerText = window.p1Data[2] + ' (' + window.p1Data[3] + ') | ' + window.p1Data[4] + ' | ' + window.p1Data[5] + ' | ' + window.p1Data[0];
+  document.getElementById('h2h-th-p1').innerText = window.p1Data[1];
+  
+  document.getElementById('p2-name').innerText = window.p2Data[1];
+  document.getElementById('p2-meta').innerText = window.p2Data[2] + ' (' + window.p2Data[3] + ') | ' + window.p2Data[4] + ' | ' + window.p2Data[5] + ' | ' + window.p2Data[0];
+  document.getElementById('h2h-th-p2').innerText = window.p2Data[1];
+  
+  const metrics = [
+    { label: "Points / Set", p1: parseFloat(window.p1Data[7]), p2: parseFloat(window.p2Data[7]), digits: 2 },
+    { label: "Kills / Set", p1: parseFloat(window.p1Data[8]), p2: parseFloat(window.p2Data[8]), digits: 2 },
+    { label: "Hitting Percentage", p1: parseFloat(window.p1Data[9]), p2: parseFloat(window.p2Data[9]), digits: 3 },
+    { label: "Digs / Set", p1: parseFloat(window.p1Data[10]), p2: parseFloat(window.p2Data[10]), digits: 2 },
+    { label: "Blocks / Set", p1: parseFloat(window.p1Data[11]), p2: parseFloat(window.p2Data[11]), digits: 2 },
+    { label: "Aces / Set", p1: parseFloat(window.p1Data[12]), p2: parseFloat(window.p2Data[12]), digits: 2 },
+    { label: "Assists / Set", p1: parseFloat(window.p1Data[13]), p2: parseFloat(window.p2Data[13]), digits: 2 },
+    { label: "Sets Played", p1: parseInt(window.p1Data[6]), p2: parseInt(window.p2Data[6]), digits: 0 }
+  ];
+  
+  let rowsHtml = "";
+  metrics.forEach(m => {
+    let v1 = isNaN(m.p1) ? "N/A" : (m.digits === 3 ? m.p1.toFixed(3) : (m.digits === 0 ? m.p1 : m.p1.toFixed(2)));
+    let v2 = isNaN(m.p2) ? "N/A" : (m.digits === 3 ? m.p2.toFixed(3) : (m.digits === 0 ? m.p2 : m.p2.toFixed(2)));
+    let leader = "—";
+    let p1Class = "";
+    let p2Class = "";
+    
+    if (!isNaN(m.p1) && !isNaN(m.p2)) {
+      if (m.p1 > m.p2) {
+        leader = window.p1Data[1];
+        p1Class = "fw-bold text-primary";
+      } else if (m.p2 > m.p1) {
+        leader = window.p2Data[1];
+        p2Class = "fw-bold text-success";
+      } else {
+        leader = "Tie";
+      }
+    }
+    
+    rowsHtml += `<tr>
+      <td class="text-start fw-semibold">${m.label}</td>
+      <td class="${p1Class}">${v1}</td>
+      <td class="${p2Class}">${v2}</td>
+      <td><span class="badge ${leader === window.p1Data[1] ? 'bg-primary' : (leader === window.p2Data[1] ? 'bg-success' : 'bg-secondary')}">${leader}</span></td>
+    </tr>`;
+  });
+  
+  document.getElementById('h2h-tbody').innerHTML = rowsHtml;
+}
+
+window.selectPlayer1 = function(row) {
+  window.p1Data = row;
+  updateH2H();
+};
+
+window.selectPlayer2 = function(row) {
+  window.p2Data = row;
+  updateH2H();
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", updateH2H);
+} else {
+  updateH2H();
+}
+setTimeout(updateH2H, 300);
+setTimeout(updateH2H, 1000);
+</script>
+```
 
 ```{r}
-#| label: player-table
+#| label: prepare-player-data
 player_table <- vb_clean |>
   select(
     Season, Player, Team, Conference, class_year, Pos, S,
@@ -123,12 +243,51 @@ player_table <- vb_clean |>
     `Aces/Set` = aces_s,
     `Ast/Set` = assists_s
   )
+```
 
+### Search Player 1
+
+Use the search bar or column filters below. Click any row to assign this player to **Player 1**.
+
+```{r}
+#| label: player-table-1
 datatable(
   player_table,
+  elementId = "player_table_1",
   filter = "top",
-  options = list(pageLength = 10, autoWidth = TRUE),
-  rownames = FALSE
+  options = list(pageLength = 5, autoWidth = TRUE),
+  rownames = FALSE,
+  callback = JS("
+    table.on('click', 'tr', function() {
+      var d = table.row(this).data();
+      if (d && window.selectPlayer1) {
+        window.selectPlayer1(d);
+      }
+    });
+  ")
+)
+```
+
+### Search Player 2
+
+Use the search bar or column filters below. Click any row to assign this player to **Player 2**.
+
+```{r}
+#| label: player-table-2
+datatable(
+  player_table,
+  elementId = "player_table_2",
+  filter = "top",
+  options = list(pageLength = 5, autoWidth = TRUE),
+  rownames = FALSE,
+  callback = JS("
+    table.on('click', 'tr', function() {
+      var d = table.row(this).data();
+      if (d && window.selectPlayer2) {
+        window.selectPlayer2(d);
+      }
+    });
+  ")
 )
 ```
 
