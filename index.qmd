@@ -1,0 +1,28 @@
+---
+title: "Does Experience Affect College Volleyball Performance?"
+subtitle: "An empirical examination of NCAA Division 1 volleyball player statistics (2020–2026)"
+format: html
+---
+
+## Overview
+
+In collegiate athletics, players often improve as they progress through their college careers. But **does experience level substantially affect individual volleyball statistics**?
+
+To answer this question, we collected comprehensive individual season statistics across six seasons of NCAA Division 1 women's volleyball (2020–2026), covering over 31,000 player-seasons across four class standings:
+
+- **Freshmen (Fr)**
+- **Sophomores (So)**
+- **Juniors (Jr)**
+- **Seniors (Sr)**
+
+## Core Findings
+
+As players progress from freshman to senior year:
+
+1. **Total Scoring**: Seniors average **1.78 points per set**, compared to **1.28** for freshmen (+39%).
+2. **Attacking Volume & Efficiency**: Seniors average **1.39 kills per set** with a **.185** average hitting percentage, compared to **0.98 kills per set** and **.141** hitting percentage for freshmen.
+3. **Net Defense**: Blocks per set increase from **0.28** (freshmen) to **0.37** (seniors) (+32%).
+4. **Floor Defense**: Digs per set increase from **1.20** (freshmen) to **1.53** (seniors) (+28%).
+5. **Serving & Setting**: Service aces and assists also rise as players take on expanded rotation duties.
+
+Explore the interactive charts, summary tables, and player explorer on the [Stats Comparison](analysis.qmd) page.

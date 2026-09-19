@@ -1,34 +1,140 @@
 ---
-title: "NCAA Division 1 Volleyball Analysis"
-author: "Student"
+title: "Comparing Volleyball Stats by Class Year"
 format: html
 execute:
-  echo: true
+  echo: false
+  warning: false
+  message: false
 ---
 
-## Setup
+## Overview
 
-First, we load the `tidyverse` package to give us tools for data manipulation and visualization.
+We analyze whether collegiate experience level (Freshman, Sophomore, Junior, Senior) in NCAA Division 1 volleyball impacts player performance across multiple facets of the game: scoring, attacking efficiency, setting, serving, and defense.
 
 ```{r}
 #| label: setup
-#| message: false
-
 library(tidyverse)
-```
-
-## Question
-
-Does experience level (class year: freshman, sophomore, junior, senior) in NCAA Division 1 volleyball affect player stats substantially?
-
-## Loading the Data
-
-We read in the 2020–2026 NCAA Division 1 volleyball dataset.
-
-```{r}
-#| label: load-data
+library(plotly)
+library(DT)
 
 volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2026.csv", show_col_types = FALSE)
 
-glimpse(volleyball)
+# Filter for standard class years and regular rotation players (>= 20 sets played)
+vb_clean <- volleyball |>
+  filter(Yr %in% c("Fr", "So", "Jr", "Sr"), S >= 20) |>
+  mutate(
+    class_year = factor(Yr, levels = c("Fr", "So", "Jr", "Sr"),
+                        labels = c("Freshman", "Sophomore", "Junior", "Senior")),
+    kills_s = round(Kills / S, 2),
+    assists_s = round(Assists / S, 2),
+    aces_s = round(Aces / S, 2),
+    digs_s = round(Digs / S, 2),
+    blocks_s = round(coalesce(TB, coalesce(`Block Solos`, 0) + coalesce(`Block Assists`, 0)) / S, 2),
+    points_s = round(PTS / S, 2),
+    hit_pct = round(`Hit Pct`, 3)
+  )
 ```
+
+## Category Averages Across Class Years
+
+Below are the per-set averages and attacking efficiencies across all four class standings from the 2020–2026 seasons. Click any column header to sort.
+
+```{r}
+#| label: class-summary
+class_summary <- vb_clean |>
+  group_by(`Class Standing` = class_year) |>
+  summarize(
+    `Players` = n(),
+    `Points / Set` = round(mean(points_s, na.rm = TRUE), 2),
+    `Kills / Set` = round(mean(kills_s, na.rm = TRUE), 2),
+    `Hitting Pct` = round(mean(hit_pct, na.rm = TRUE), 3),
+    `Digs / Set` = round(mean(digs_s, na.rm = TRUE), 2),
+    `Blocks / Set` = round(mean(blocks_s, na.rm = TRUE), 2),
+    `Aces / Set` = round(mean(aces_s, na.rm = TRUE), 2),
+    `Assists / Set` = round(mean(assists_s, na.rm = TRUE), 2)
+  )
+
+datatable(class_summary, options = list(dom = 't', paging = FALSE), rownames = FALSE)
+```
+
+## Comparing Key Metrics by Class Year
+
+This interactive chart compares scoring (Points), attacking (Kills), and defending (Digs and Blocks) per set across experience levels.
+
+```{r}
+#| label: multi-metric-chart
+metrics_long <- class_summary |>
+  select(`Class Standing`, `Points / Set`, `Kills / Set`, `Digs / Set`, `Blocks / Set`) |>
+  pivot_longer(cols = -`Class Standing`, names_to = "Metric", values_to = "Average")
+
+p_bars <- ggplot(metrics_long, aes(x = `Class Standing`, y = Average, fill = `Class Standing`)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ Metric, scales = "free_y") +
+  scale_fill_brewer(palette = "Blues") +
+  labs(
+    title = "Per-Set Production by Experience Level",
+    x = NULL,
+    y = "Average Per Set"
+  ) +
+  theme_minimal()
+
+ggplotly(p_bars)
+```
+
+## Distribution of Total Points per Set
+
+Hover over the boxplot below to examine the median, quartiles, and range of total points produced per set by class year.
+
+```{r}
+#| label: points-boxplot
+p_box <- ggplot(vb_clean, aes(x = class_year, y = points_s, fill = class_year)) +
+  geom_boxplot(outlier.alpha = 0.2, show.legend = FALSE) +
+  scale_fill_brewer(palette = "Blues") +
+  coord_cartesian(ylim = c(0, 6)) +
+  labs(
+    title = "Points per Set Distribution",
+    x = "Class Standing",
+    y = "Points per Set"
+  ) +
+  theme_minimal()
+
+ggplotly(p_box)
+```
+
+## Interactive Player Explorer
+
+Search, filter by conference, position, or team, and sort players across all statistical categories.
+
+```{r}
+#| label: player-table
+player_table <- vb_clean |>
+  select(
+    Season, Player, Team, Conference, class_year, Pos, S,
+    points_s, kills_s, hit_pct, digs_s, blocks_s, aces_s, assists_s
+  ) |>
+  rename(
+    Class = class_year,
+    Sets = S,
+    `Pts/Set` = points_s,
+    `Kills/Set` = kills_s,
+    `Hit Pct` = hit_pct,
+    `Digs/Set` = digs_s,
+    `Blk/Set` = blocks_s,
+    `Aces/Set` = aces_s,
+    `Ast/Set` = assists_s
+  )
+
+datatable(
+  player_table,
+  filter = "top",
+  options = list(pageLength = 10, autoWidth = TRUE),
+  rownames = FALSE
+)
+```
+
+## Key Takeaways
+
+1. **Overall Scoring**: Average points per set increases by **39%** from Freshman year (1.28) to Senior year (1.78).
+2. **Attacking Volume & Efficiency**: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.
+3. **Net Defense**: Average blocks per set climb from 0.28 (freshmen) to 0.37 (seniors), a **32%** increase.
+4. **Floor Defense**: Digs per set increase steadily each year, rising from 1.20 to 1.53 per set.

@@ -1,0 +1,69 @@
+---
+title: "The Veteran Advantage: Learning to Win at the Net"
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+When evaluating collegiate volleyball attackers, raw kill totals often grab headlines. But in high-level NCAA Division 1 play, rallies frequently hinge on attacking discipline: putting the ball to the floor without handing free points to the opponent on unforced errors. To understand how collegiate hitters mature, we examined individual season statistics from over 15,000 player-seasons across six NCAA seasons (2020–2026), filtering for active attackers with at least 100 attack attempts.
+
+```{r}
+#| label: veteran-advantage-plot
+#| fig-width: 8
+#| fig-height: 5
+#| fig-align: center
+
+library(tidyverse)
+
+volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2026.csv", show_col_types = FALSE)
+
+trends <- volleyball |>
+  filter(Yr %in% c("Fr", "So", "Jr", "Sr"), `Total Attacks` >= 100) |>
+  mutate(
+    class_year = factor(Yr, levels = c("Fr", "So", "Jr", "Sr"),
+                        labels = c("Freshman", "Sophomore", "Junior", "Senior"))
+  ) |>
+  group_by(class_year) |>
+  summarize(
+    `Kill Rate` = mean(Kills / `Total Attacks`, na.rm = TRUE) * 100,
+    `Error Rate` = mean(Errors / `Total Attacks`, na.rm = TRUE) * 100
+  ) |>
+  pivot_longer(
+    cols = c(`Kill Rate`, `Error Rate`),
+    names_to = "Metric",
+    values_to = "Percentage"
+  )
+
+ggplot(trends, aes(x = class_year, y = Percentage, color = Metric, group = Metric)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3.5) +
+  geom_text(
+    aes(label = paste0(round(Percentage, 1), "%")),
+    vjust = ifelse(trends$Metric == "Kill Rate", -1.2, 1.8),
+    fontface = "bold",
+    size = 4,
+    show.legend = FALSE
+  ) +
+  scale_color_manual(values = c("Kill Rate" = "#1b7837", "Error Rate" = "#d73027")) +
+  scale_y_continuous(limits = c(10, 42), labels = \(x) paste0(x, "%")) +
+  labs(
+    title = "The Veteran Shift: Rising Kills and Declining Errors",
+    subtitle = "Attack outcome rates across NCAA Division 1 hitters (2020–2026, min. 100 attacks)",
+    x = "Class Standing",
+    y = "Percentage of Total Attacks",
+    color = NULL,
+    caption = "Source: NCAA Division 1 Volleyball Statistics"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", size = 15)
+  )
+```
+
+The data reveals a steady, two-sided evolution. As attackers progress from their freshman to senior campaigns, their kill rate climbs monotonically from 34.5% to 36.9%. At the same time, their attack error rate declines each year, dropping from 16.4% down to 14.3%. Together, these compounding adjustments explain why seniors hit at an average efficiency of .226 compared to .181 for freshmen: veterans generate more offensive points while donating fewer errors.
+
+Collegiate experience transforms *how* hitters attack rather than merely how frequently they swing. Freshmen arriving from high school face Division 1 blockers who are bigger, faster, and better positioned, which often induces rushed swings into the net or out of bounds. By senior year, players have mastered shot selection—wiping balls off the block, tipping into soft spots on the floor, and avoiding low-percentage swings. The veteran advantage is fundamentally about poise and decision-making at the net.

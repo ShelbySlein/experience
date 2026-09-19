@@ -1,0 +1,22 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - story.qmd
+    - analysis.qmd
+
+website:
+  title: "NCAA Volleyball: Experience vs Stats"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: story.qmd
+        text: Story
+      - href: analysis.qmd
+        text: Stats Comparison
+
+format:
+  html:
+    theme: cosmo
+    toc: true
