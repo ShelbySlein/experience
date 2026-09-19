@@ -17,14 +17,18 @@ First, we load the `tidyverse` package to give us tools for data manipulation an
 library(tidyverse)
 ```
 
+## Question
+
+Does experience level (class year: freshman, sophomore, junior, senior) in NCAA Division 1 volleyball affect player stats substantially?
+
 ## Loading the Data
 
-We read in the 5-year NCAA Division 1 volleyball dataset from the `data` directory.
+We read in the 2020–2026 NCAA Division 1 volleyball dataset.
 
 ```{r}
 #| label: load-data
 
-volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2024.csv", show_col_types = FALSE)
+volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2026.csv", show_col_types = FALSE)
 
 glimpse(volleyball)
 ```
