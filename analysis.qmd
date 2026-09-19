@@ -1,0 +1,30 @@
+---
+title: "NCAA Division 1 Volleyball Analysis"
+author: "Student"
+format: html
+execute:
+  echo: true
+---
+
+## Setup
+
+First, we load the `tidyverse` package to give us tools for data manipulation and visualization.
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+```
+
+## Loading the Data
+
+We read in the 5-year NCAA Division 1 volleyball dataset from the `data` directory.
+
+```{r}
+#| label: load-data
+
+volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2024.csv", show_col_types = FALSE)
+
+glimpse(volleyball)
+```
