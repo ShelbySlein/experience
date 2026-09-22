@@ -39,25 +39,21 @@ library(tidyverse)
 volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2026.csv", show_col_types = FALSE)
 
 volleyball |>
-  filter(Yr %in% c("Fr", "So", "Jr", "Sr"), S >= 20) |>
+  filter(Yr %in% c("Fr", "So", "Jr", "Sr"), S >= 20, !is.na(PTS)) |>
   mutate(
     class_year = factor(Yr, levels = c("Fr", "So", "Jr", "Sr"),
                         labels = c("Freshman", "Sophomore", "Junior", "Senior")),
     points_s = PTS / S
   ) |>
-  group_by(class_year) |>
-  summarize(avg_points = mean(points_s, na.rm = TRUE)) |>
-  ggplot(aes(x = class_year, y = avg_points, fill = class_year)) +
-  geom_col(show.legend = FALSE, width = 0.55) +
-  geom_text(aes(label = round(avg_points, 2)), vjust = -0.5, fontface = "bold", size = 4) +
-  scale_y_continuous(limits = c(0, 2.1)) +
-  scale_fill_brewer(palette = "Blues") +
+  ggplot(aes(x = class_year, y = points_s, color = class_year)) +
+  geom_jitter(alpha = 0.12, size = 0.75, width = 0.28, show.legend = FALSE) +
+  scale_color_brewer(palette = "Dark2") +
   labs(
-    title = "Average Points per Set by Class Standing",
-    subtitle = "NCAA Division 1 Women's Volleyball (2020–2026, min. 20 sets played)",
+    title = "Points per Set by Class Standing",
+    subtitle = "Each point represents an individual player-season (25,000+ observations)",
     x = "Class Standing",
     y = "Points per Set",
-    caption = "Source: NCAA Division 1 Volleyball Statistics"
+    caption = "Source: NCAA Division 1 Volleyball Statistics (2020–2026)"
   ) +
   theme_minimal(base_size = 12)
 ```
