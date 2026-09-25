@@ -1,5 +1,54 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Shelby Slein\nWelcome to my NCAA Division 1 Volleyball analytics project!\nThis website examines individual player performance from 2020 through 2026, investigating how experience level and class standing relate to scoring output, attacking efficiency, and defensive impact."
+  },
+  {
+    "objectID": "story.html",
+    "href": "story.html",
+    "title": "The Veteran Advantage: Learning to Win at the Net",
+    "section": "",
+    "text": "When evaluating collegiate volleyball attackers, raw kill totals often grab headlines. But in high-level NCAA Division 1 play, rallies frequently hinge on attacking discipline: putting the ball to the floor without handing free points to the opponent on unforced errors. To understand how collegiate hitters mature, we examined individual season statistics from over 15,000 player-seasons across six NCAA seasons (2020–2026), filtering for active attackers with at least 100 attack attempts.\nThe data reveals a steady, two-sided evolution. As attackers progress from their freshman to senior campaigns, their kill rate climbs monotonically from 34.5% to 36.9%. At the same time, their attack error rate declines each year, dropping from 16.4% down to 14.3%. Together, these compounding adjustments explain why seniors hit at an average efficiency of .226 compared to .181 for freshmen: veterans generate more offensive points while donating fewer errors."
+  },
+  {
+    "objectID": "story.html#position-breakdown-outside-hitters-vs.-middle-blockers",
+    "href": "story.html#position-breakdown-outside-hitters-vs.-middle-blockers",
+    "title": "The Veteran Advantage: Learning to Win at the Net",
+    "section": "Position Breakdown: Outside Hitters vs. Middle Blockers",
+    "text": "Position Breakdown: Outside Hitters vs. Middle Blockers\nNot all hitting roles are created equal. Middle Blockers (MB) attack quick sets close to the setter, often facing single blockers, while Outside Hitters (OH) carry the burden of out-of-system “bailout” sets against formed double blocks. Does collegiate experience help both roles equally?\n\n\n\n\n\n\n\n\n\nThe split shows that experience pays off differently depending on the role. Middle Blockers maintain high kill rates from day one (39.5% as freshmen) because of their physical height and set speed, yet they still trim errors down from 15.5% to 13.7%. Outside Hitters experience an even more noticeable transformation: their error rate drops by more than two full points (17.4% to 15.2%) while kill rates jump from 32.3% to 34.0%, demonstrating how seasoned pins learn to manage difficult balls."
+  },
+  {
+    "objectID": "story.html#case-study-marta-levinska-arizona-state",
+    "href": "story.html#case-study-marta-levinska-arizona-state",
+    "title": "The Veteran Advantage: Learning to Win at the Net",
+    "section": "Case Study: Marta Levinska (Arizona State)",
+    "text": "Case Study: Marta Levinska (Arizona State)\nAggregate statistics show broad patterns, but individual careers bring the trend to life. Marta Levinska arrived at Arizona State in 2020 as a high-potential international opposite/outside hitter. Over four consecutive seasons, her trajectory tracked the veteran curve with textbook precision.\n\n\n\n\n\n\n\n\n\nAs a freshman, Levinska delivered a productive 245 kills with a .204 hitting percentage. By her senior campaign in 2023–24, she racked up 571 kills while pushing her kill rate to 45.8% and cutting her error rate to 11.0%—earning AVCA All-America honors and guiding Arizona State to the NCAA Sweet 16. Her growth exemplifies how collegiate attackers combine strength, shot selection, and court vision to dominate at the net."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Does Experience Affect College Volleyball Performance?",
+    "section": "",
+    "text": "In collegiate athletics, players often improve as they progress through their college careers. But does experience level substantially affect individual volleyball statistics?\nTo answer this question, we collected comprehensive individual season statistics across six seasons of NCAA Division 1 women’s volleyball (2020–2026), covering over 31,000 player-seasons across four class standings:\n\nFreshmen (Fr)\nSophomores (So)\nJuniors (Jr)\nSeniors (Sr)"
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Does Experience Affect College Volleyball Performance?",
+    "section": "",
+    "text": "In collegiate athletics, players often improve as they progress through their college careers. But does experience level substantially affect individual volleyball statistics?\nTo answer this question, we collected comprehensive individual season statistics across six seasons of NCAA Division 1 women’s volleyball (2020–2026), covering over 31,000 player-seasons across four class standings:\n\nFreshmen (Fr)\nSophomores (So)\nJuniors (Jr)\nSeniors (Sr)"
+  },
+  {
+    "objectID": "index.html#core-findings",
+    "href": "index.html#core-findings",
+    "title": "Does Experience Affect College Volleyball Performance?",
+    "section": "Core Findings",
+    "text": "Core Findings\nAs players progress from freshman to senior year:\n\nTotal Scoring: Seniors average 1.78 points per set, compared to 1.28 for freshmen (+39%).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Blocks per set increase from 0.28 (freshmen) to 0.37 (seniors) (+32%).\nFloor Defense: Digs per set increase from 1.20 (freshmen) to 1.53 (seniors) (+28%).\nServing & Setting: Service aces and assists also rise as players take on expanded rotation duties.\n\nExplore the interactive charts, summary tables, and player explorer on the Stats Comparison page."
+  },
+  {
     "objectID": "analysis.html",
     "href": "analysis.html",
     "title": "Comparing Volleyball Stats by Class Year",
@@ -54,47 +103,5 @@
     "title": "Comparing Volleyball Stats by Class Year",
     "section": "Key Takeaways",
     "text": "Key Takeaways\n\nOverall Scoring: Average points per set increases by 39% from Freshman year (1.28) to Senior year (1.78).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Average blocks per set climb from 0.28 (freshmen) to 0.37 (seniors), a 32% increase.\nFloor Defense: Digs per set increase steadily each year, rising from 1.20 to 1.53 per set."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Does Experience Affect College Volleyball Performance?",
-    "section": "",
-    "text": "In collegiate athletics, players often improve as they progress through their college careers. But does experience level substantially affect individual volleyball statistics?\nTo answer this question, we collected comprehensive individual season statistics across six seasons of NCAA Division 1 women’s volleyball (2020–2026), covering over 31,000 player-seasons across four class standings:\n\nFreshmen (Fr)\nSophomores (So)\nJuniors (Jr)\nSeniors (Sr)"
-  },
-  {
-    "objectID": "index.html#overview",
-    "href": "index.html#overview",
-    "title": "Does Experience Affect College Volleyball Performance?",
-    "section": "",
-    "text": "In collegiate athletics, players often improve as they progress through their college careers. But does experience level substantially affect individual volleyball statistics?\nTo answer this question, we collected comprehensive individual season statistics across six seasons of NCAA Division 1 women’s volleyball (2020–2026), covering over 31,000 player-seasons across four class standings:\n\nFreshmen (Fr)\nSophomores (So)\nJuniors (Jr)\nSeniors (Sr)"
-  },
-  {
-    "objectID": "index.html#core-findings",
-    "href": "index.html#core-findings",
-    "title": "Does Experience Affect College Volleyball Performance?",
-    "section": "Core Findings",
-    "text": "Core Findings\nAs players progress from freshman to senior year:\n\nTotal Scoring: Seniors average 1.78 points per set, compared to 1.28 for freshmen (+39%).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Blocks per set increase from 0.28 (freshmen) to 0.37 (seniors) (+32%).\nFloor Defense: Digs per set increase from 1.20 (freshmen) to 1.53 (seniors) (+28%).\nServing & Setting: Service aces and assists also rise as players take on expanded rotation duties.\n\nExplore the interactive charts, summary tables, and player explorer on the Stats Comparison page."
-  },
-  {
-    "objectID": "story.html",
-    "href": "story.html",
-    "title": "The Veteran Advantage: Learning to Win at the Net",
-    "section": "",
-    "text": "When evaluating collegiate volleyball attackers, raw kill totals often grab headlines. But in high-level NCAA Division 1 play, rallies frequently hinge on attacking discipline: putting the ball to the floor without handing free points to the opponent on unforced errors. To understand how collegiate hitters mature, we examined individual season statistics from over 15,000 player-seasons across six NCAA seasons (2020–2026), filtering for active attackers with at least 100 attack attempts.\nThe data reveals a steady, two-sided evolution. As attackers progress from their freshman to senior campaigns, their kill rate climbs monotonically from 34.5% to 36.9%. At the same time, their attack error rate declines each year, dropping from 16.4% down to 14.3%. Together, these compounding adjustments explain why seniors hit at an average efficiency of .226 compared to .181 for freshmen: veterans generate more offensive points while donating fewer errors."
-  },
-  {
-    "objectID": "story.html#position-breakdown-outside-hitters-vs.-middle-blockers",
-    "href": "story.html#position-breakdown-outside-hitters-vs.-middle-blockers",
-    "title": "The Veteran Advantage: Learning to Win at the Net",
-    "section": "Position Breakdown: Outside Hitters vs. Middle Blockers",
-    "text": "Position Breakdown: Outside Hitters vs. Middle Blockers\nNot all hitting roles are created equal. Middle Blockers (MB) attack quick sets close to the setter, often facing single blockers, while Outside Hitters (OH) carry the burden of out-of-system “bailout” sets against formed double blocks. Does collegiate experience help both roles equally?\n\n\n\n\n\n\n\n\n\nThe split shows that experience pays off differently depending on the role. Middle Blockers maintain high kill rates from day one (39.5% as freshmen) because of their physical height and set speed, yet they still trim errors down from 15.5% to 13.7%. Outside Hitters experience an even more noticeable transformation: their error rate drops by more than two full points (17.4% to 15.2%) while kill rates jump from 32.3% to 34.0%, demonstrating how seasoned pins learn to manage difficult balls."
-  },
-  {
-    "objectID": "story.html#case-study-marta-levinska-arizona-state",
-    "href": "story.html#case-study-marta-levinska-arizona-state",
-    "title": "The Veteran Advantage: Learning to Win at the Net",
-    "section": "Case Study: Marta Levinska (Arizona State)",
-    "text": "Case Study: Marta Levinska (Arizona State)\nAggregate statistics show broad patterns, but individual careers bring the trend to life. Marta Levinska arrived at Arizona State in 2020 as a high-potential international opposite/outside hitter. Over four consecutive seasons, her trajectory tracked the veteran curve with textbook precision.\n\n\n\n\n\n\n\n\n\nAs a freshman, Levinska delivered a productive 245 kills with a .204 hitting percentage. By her senior campaign in 2023–24, she racked up 571 kills while pushing her kill rate to 45.8% and cutting her error rate to 11.0%—earning AVCA All-America honors and guiding Arizona State to the NCAA Sweet 16. Her growth exemplifies how collegiate attackers combine strength, shot selection, and court vision to dominate at the net."
   }
 ]
