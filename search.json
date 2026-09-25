@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Shelby Slein\nWelcome to my NCAA Division 1 Volleyball analytics project!\nThis website examines individual player performance from 2020 through 2026, investigating how experience level and class standing relate to scoring output, attacking efficiency, and defensive impact."
+    "text": "Shelby Slein\nWelcome to my NCAA Division 1 Volleyball analytics project!\nThis website examines individual player performance from 2020 through 2026, investigating how experience level and class standing relate to scoring output, attacking efficiency, and defensive impact.\nThe data for this project was collected from official NCAA Division 1 women’s volleyball season statistics spanning 2020 through 2026. The dataset includes over 31,000 individual player-seasons across four class standings (Freshman through Senior), recording comprehensive metrics on kills, hitting percentage, blocks, digs, service aces, and points per set."
   },
   {
     "objectID": "story.html",
