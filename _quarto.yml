@@ -4,6 +4,7 @@ project:
     - index.qmd
     - story.qmd
     - analysis.qmd
+    - about.qmd
 
 website:
   title: "NCAA Volleyball: Experience vs Stats"
@@ -15,6 +16,8 @@ website:
         text: The Veteran Advantage
       - href: analysis.qmd
         text: Stats Comparison
+      - href: about.qmd
+        text: About
 
 format:
   html:

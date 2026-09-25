@@ -160,6 +160,9 @@ Compare standout hitters **Sarah Franklin** and **Harper Murray** across each ye
 </div>
 
 <script>
+window.yearMap = { Fr: "Freshman", So: "Sophomore", Jr: "Junior", Sr: "Senior" };
+window.abbrMap = { "Freshman": "Fr", "Sophomore": "So", "Junior": "Jr", "Senior": "Sr" };
+
 window.franklinYears = {
   Fr: ["2020-2021", "Sarah Franklin", "Michigan St.", "Big Ten", "Freshman", "OH", 26, 4.13, 3.81, 0.162, 2.19, 0.17, 0.15, 0.08],
   So: ["2021-2022", "Sarah Franklin", "Michigan St.", "Big Ten", "Sophomore", "OH", 102, 4.50, 3.96, 0.224, 2.25, 0.58, 0.25, 0.26],
@@ -174,14 +177,29 @@ window.murrayYears = {
   Sr: null
 };
 
-window.isCustomMatchup = false;
-window.activeSlot = 'p1';
+window.p1PlayerName = "Sarah Franklin";
+window.p2PlayerName = "Harper Murray";
 window.currentComparisonYear = "Fr";
-window.p1Data = window.franklinYears["Fr"];
-window.p2Data = window.murrayYears["Fr"];
+window.activeSlot = 'p1';
+window.playerSeasonLookup = {};
+
+function getPlayerData(playerName, yrAbbr) {
+  if (!playerName) return null;
+  var fullClass = window.yearMap[yrAbbr] || yrAbbr;
+  var key = playerName.toLowerCase() + '|' + fullClass;
+  if (window.playerSeasonLookup && window.playerSeasonLookup[key]) {
+    return window.playerSeasonLookup[key];
+  }
+  if (playerName === "Sarah Franklin" && window.franklinYears && window.franklinYears[yrAbbr]) {
+    return window.franklinYears[yrAbbr];
+  }
+  if (playerName === "Harper Murray" && window.murrayYears && window.murrayYears[yrAbbr]) {
+    return window.murrayYears[yrAbbr];
+  }
+  return null;
+}
 
 function setComparisonYear(yr) {
-  window.isCustomMatchup = false;
   window.currentComparisonYear = yr;
   
   const years = ["Fr", "So", "Jr", "Sr"];
@@ -198,26 +216,27 @@ function setComparisonYear(yr) {
     }
   });
 
-  const resetBtn = document.getElementById("btn-reset-featured");
-  if (resetBtn) resetBtn.classList.add("d-none");
-
-  const modeBadge = document.getElementById("h2h-mode-badge");
-  if (modeBadge) {
-    modeBadge.className = "badge bg-light text-primary";
-    modeBadge.innerText = "Featured Career Track";
+  const yrLabel = document.getElementById("comparison-yr-label");
+  if (yrLabel) {
+    yrLabel.innerText = (window.yearMap[yr] || yr) + " Season";
   }
 
-  window.p1Data = window.franklinYears[yr];
-  window.p2Data = window.murrayYears[yr];
-
-  const labels = { Fr: "Freshman Season", So: "Sophomore Season", Jr: "Junior Season", Sr: "Senior Season" };
-  const yrLabel = document.getElementById("comparison-yr-label");
-  if (yrLabel) yrLabel.innerText = labels[yr] || yr;
+  window.p1Data = getPlayerData(window.p1PlayerName, yr);
+  window.p2Data = getPlayerData(window.p2PlayerName, yr);
 
   updateH2H();
 }
 
 function resetToFeatured() {
+  window.p1PlayerName = "Sarah Franklin";
+  window.p2PlayerName = "Harper Murray";
+  const resetBtn = document.getElementById("btn-reset-featured");
+  if (resetBtn) resetBtn.classList.add("d-none");
+  const modeBadge = document.getElementById("h2h-mode-badge");
+  if (modeBadge) {
+    modeBadge.className = "badge bg-light text-primary";
+    modeBadge.innerText = "Featured Career Track";
+  }
   setComparisonYear('Fr');
 }
 
@@ -225,25 +244,25 @@ function updateH2H() {
   var p1El = document.getElementById('p1-name');
   if (!p1El) return;
   
+  var yrName = window.yearMap[window.currentComparisonYear] || window.currentComparisonYear;
+  var p1DisplayName = window.p1Data ? window.p1Data[1] : window.p1PlayerName;
+  var p2DisplayName = window.p2Data ? window.p2Data[1] : window.p2PlayerName;
+  
+  p1El.innerText = p1DisplayName;
+  document.getElementById('h2h-th-p1').innerText = p1DisplayName;
   if (window.p1Data) {
-    p1El.innerText = window.p1Data[1];
     document.getElementById('p1-meta').innerText = window.p1Data[2] + ' (' + window.p1Data[3] + ') | ' + window.p1Data[4] + ' | ' + window.p1Data[5] + ' | ' + window.p1Data[0];
-    document.getElementById('h2h-th-p1').innerText = window.p1Data[1];
   } else {
-    p1El.innerText = "Player 1";
-    document.getElementById('p1-meta').innerText = "No data selected";
-    document.getElementById('h2h-th-p1').innerText = "Player 1";
+    document.getElementById('p1-meta').innerText = "No recorded " + yrName + " season in dataset";
   }
   
   var p2El = document.getElementById('p2-name');
+  p2El.innerText = p2DisplayName;
+  document.getElementById('h2h-th-p2').innerText = p2DisplayName;
   if (window.p2Data) {
-    p2El.innerText = window.p2Data[1];
     document.getElementById('p2-meta').innerText = window.p2Data[2] + ' (' + window.p2Data[3] + ') | ' + window.p2Data[4] + ' | ' + window.p2Data[5] + ' | ' + window.p2Data[0];
-    document.getElementById('h2h-th-p2').innerText = window.p2Data[1];
   } else {
-    p2El.innerText = "Player 2";
-    document.getElementById('p2-meta').innerText = window.isCustomMatchup ? "No player selected" : "Senior season pending / not yet played";
-    document.getElementById('h2h-th-p2').innerText = "Player 2";
+    document.getElementById('p2-meta').innerText = "No recorded " + yrName + " season in dataset";
   }
   
   const metrics = [
@@ -267,19 +286,19 @@ function updateH2H() {
     
     if (!isNaN(m.p1) && !isNaN(m.p2)) {
       if (m.p1 > m.p2) {
-        leader = window.p1Data[1];
+        leader = p1DisplayName;
         p1Class = "fw-bold text-primary";
       } else if (m.p2 > m.p1) {
-        leader = window.p2Data[1];
+        leader = p2DisplayName;
         p2Class = "fw-bold text-success";
       } else {
         leader = "Tie";
       }
     } else if (!isNaN(m.p1) && isNaN(m.p2)) {
-      leader = window.p1Data[1];
+      leader = p1DisplayName;
       p1Class = "fw-bold text-primary";
     } else if (isNaN(m.p1) && !isNaN(m.p2)) {
-      leader = window.p2Data[1];
+      leader = p2DisplayName;
       p2Class = "fw-bold text-success";
     }
     
@@ -287,50 +306,12 @@ function updateH2H() {
       <td class="text-start fw-semibold">${m.label}</td>
       <td class="${p1Class}">${v1}</td>
       <td class="${p2Class}">${v2}</td>
-      <td><span class="badge ${leader === (window.p1Data ? window.p1Data[1] : '') ? 'bg-primary' : (leader === (window.p2Data ? window.p2Data[1] : '') ? 'bg-success' : 'bg-secondary')}">${leader}</span></td>
+      <td><span class="badge ${leader === p1DisplayName ? 'bg-primary' : (leader === p2DisplayName ? 'bg-success' : 'bg-secondary')}">${leader}</span></td>
     </tr>`;
   });
   
   document.getElementById('h2h-tbody').innerHTML = rowsHtml;
 }
-
-function enterCustomMatchupMode() {
-  window.isCustomMatchup = true;
-  ["Fr", "So", "Jr", "Sr"].forEach(y => {
-    const btn = document.getElementById("btn-yr-" + y);
-    if (btn) {
-      btn.classList.remove("btn-light", "active");
-      btn.classList.add("btn-outline-light");
-    }
-  });
-  const resetBtn = document.getElementById("btn-reset-featured");
-  if (resetBtn) resetBtn.classList.remove("d-none");
-
-  const modeBadge = document.getElementById("h2h-mode-badge");
-  if (modeBadge) {
-    modeBadge.className = "badge bg-warning text-dark";
-    modeBadge.innerText = "Custom Matchup";
-  }
-
-  const yrLabel = document.getElementById("comparison-yr-label");
-  if (yrLabel) {
-    const c1 = window.p1Data ? window.p1Data[4] : "P1";
-    const c2 = window.p2Data ? window.p2Data[4] : "P2";
-    yrLabel.innerText = c1 + " vs " + c2;
-  }
-}
-
-window.selectPlayer1 = function(row) {
-  window.p1Data = row;
-  enterCustomMatchupMode();
-  updateH2H();
-};
-
-window.selectPlayer2 = function(row) {
-  window.p2Data = row;
-  enterCustomMatchupMode();
-  updateH2H();
-};
 
 window.setActiveSlot = function(slot) {
   window.activeSlot = slot;
@@ -357,20 +338,34 @@ window.setActiveSlot = function(slot) {
 
 window.handleTableSelection = function(d) {
   if (!d || d.length === 0) return;
+  const pName = d[1];
+  const pClass = d[4];
+  const yrAbbr = window.abbrMap[pClass] || "Fr";
   const badge = document.getElementById("selection-status-badge");
+  const resetBtn = document.getElementById("btn-reset-featured");
+  if (resetBtn) resetBtn.classList.remove("d-none");
+
+  const modeBadge = document.getElementById("h2h-mode-badge");
+  if (modeBadge) {
+    modeBadge.className = "badge bg-warning text-dark";
+    modeBadge.innerText = "Custom Matchup";
+  }
+
   if (window.activeSlot === 'p1') {
-    window.selectPlayer1(d);
+    window.p1PlayerName = pName;
     if (badge) {
-      badge.innerText = "Selected " + d[1] + " (" + d[4] + ") as Player 1! Next click will set Player 2.";
+      badge.innerText = "Selected " + pName + " (" + pClass + ") as Player 1! Next click will set Player 2.";
     }
     window.setActiveSlot('p2');
   } else {
-    window.selectPlayer2(d);
+    window.p2PlayerName = pName;
     if (badge) {
-      badge.innerText = "Selected " + d[1] + " (" + d[4] + ") as Player 2! Next click will set Player 1.";
+      badge.innerText = "Selected " + pName + " (" + pClass + ") as Player 2! Next click will set Player 1.";
     }
     window.setActiveSlot('p1');
   }
+
+  setComparisonYear(yrAbbr);
 };
 
 if (document.readyState === "loading") {
@@ -435,12 +430,28 @@ datatable(
   options = list(pageLength = 8, autoWidth = TRUE),
   rownames = FALSE,
   callback = JS("
-    table.on('click', 'tbody tr', function() {
-      var d = table.row(this).data();
-      if (d && window.handleTableSelection) {
-        window.handleTableSelection(d);
+    function(table) {
+      window.playerSeasonLookup = {};
+      var allData = table.data();
+      for (var i = 0; i < allData.length; i++) {
+        var r = allData[i];
+        var key = r[1].toLowerCase() + '|' + r[4];
+        if (!window.playerSeasonLookup[key] || (r[6] > window.playerSeasonLookup[key][6])) {
+          window.playerSeasonLookup[key] = r;
+        }
       }
-    });
+      
+      table.on('click', 'tbody tr', function() {
+        var d = table.row(this).data();
+        if (d && window.handleTableSelection) {
+          window.handleTableSelection(d);
+        }
+      });
+      
+      if (window.setComparisonYear) {
+        window.setComparisonYear(window.currentComparisonYear || 'Fr');
+      }
+    }
   ")
 )
 ```

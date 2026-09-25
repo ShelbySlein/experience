@@ -1,0 +1,20 @@
+---
+title: "About"
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/ShelbySlein
+    - icon: envelope
+      text: Email
+      href: mailto:s.slein30@ncf.edu
+---
+
+### Shelby Slein
+
+Welcome to my NCAA Division 1 Volleyball analytics project! 
+
+This website examines individual player performance from 2020 through 2026, investigating how experience level and class standing relate to scoring output, attacking efficiency, and defensive impact.
+
+The data for this project was sourced from official [NCAA Statistics](https://stats.ncaa.org/) spanning the 2020 through 2026 seasons. You can also view and download the compiled dataset directly from the [GitHub project data repository](https://github.com/ShelbySlein/experience/blob/main/data/ncaa_d1_volleyball_2020_2026.csv).
