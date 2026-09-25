@@ -35,11 +35,18 @@
     "text": "Distribution of Total Points per Set\nHover over the boxplot below to examine the median, quartiles, and range of total points produced per set by class year."
   },
   {
-    "objectID": "analysis.html#interactive-player-comparison-head-to-head",
-    "href": "analysis.html#interactive-player-comparison-head-to-head",
+    "objectID": "analysis.html#interactive-player-comparison-head-to-head-by-class-year",
+    "href": "analysis.html#interactive-player-comparison-head-to-head-by-class-year",
     "title": "Comparing Volleyball Stats by Class Year",
-    "section": "Interactive Player Comparison (Head-to-Head)",
-    "text": "Interactive Player Comparison (Head-to-Head)\nCompare any two players side-by-side. Use the search bars in Player 1 and Player 2 below, then click any row in either table to update the comparison card instantly.\n\n  \n    Head-to-Head Player Comparison\n    Click any row in Player 1 or Player 2 table below to update\n  \n  \n    \n      \n        Player 1\n        Sarah Franklin\n        Wisconsin (Big Ten) | Junior | OH | 2023-2024\n      \n      \n        VS\n      \n      \n        Player 2\n        Harper Murray\n        Nebraska (Big Ten) | Freshman | OH | 2023-2024\n      \n    \n    \n    \n      \n\n\n\nStat Category\nSarah Franklin\nHarper Murray\nLeader\n\n\n\n\n\n\n    \n  \n\n\n\n\nSearch Player 1\nUse the search bar or column filters below. Click any row to assign this player to Player 1.\n\n\n\n\n\n\n\n\nSearch Player 2\nUse the search bar or column filters below. Click any row to assign this player to Player 2."
+    "section": "Interactive Player Comparison (Head-to-Head by Class Year)",
+    "text": "Interactive Player Comparison (Head-to-Head by Class Year)\nCompare standout hitters Sarah Franklin and Harper Murray across each year of their college careers (Freshman, Sophomore, Junior, and Senior), or search the player directory below to build any custom head-to-head matchup.\n\n  \n    \n      Head-to-Head Comparison\n      Featured Career Track\n    \n    \n      \n        Freshman\n        Sophomore\n        Junior\n        Senior\n      \n      \n        ↺ Reset to Featured\n      \n    \n  \n  \n    \n      \n        Player 1\n        Sarah Franklin\n        Michigan St. (Big Ten) | Freshman | OH | 2020-2021\n      \n      \n        VS\n        Freshman Season\n      \n      \n        Player 2\n        Harper Murray\n        Nebraska (Big Ten) | Freshman | OH | 2023-2024\n      \n    \n    \n    \n      \n\n\n\nStat Category\nSarah Franklin\nHarper Murray\nLeader"
+  },
+  {
+    "objectID": "analysis.html#player-directory-custom-matchup-selector",
+    "href": "analysis.html#player-directory-custom-matchup-selector",
+    "title": "Comparing Volleyball Stats by Class Year",
+    "section": "Player Directory (Custom Matchup Selector)",
+    "text": "Player Directory (Custom Matchup Selector)\nSearch for any player by name, school, conference, or position. Click a row to assign that player to the comparison card above.\n\n  \n    \n      Next table click sets:\n      \n        \n          👤 Player 1 (Blue)\n        \n        \n          👤 Player 2 (Green)\n        \n      \n    \n    \n      Ready: Click any row below to set Player 1"
   },
   {
     "objectID": "analysis.html#key-takeaways",
@@ -67,7 +74,7 @@
     "href": "index.html#core-findings",
     "title": "Does Experience Affect College Volleyball Performance?",
     "section": "Core Findings",
-    "text": "Core Findings\nAs players progress from freshman to senior year:\n\nTotal Scoring: Seniors average 1.78 points per set, compared to 1.28 for freshmen (+39%).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Blocks per set increase from 0.28 (freshmen) to 0.37 (seniors) (+32%).\nFloor Defense: Digs per set increase from 1.20 (freshmen) to 1.53 (seniors) (+28%).\nServing & Setting: Service aces and assists also rise as players take on expanded rotation duties.\n\n\n\n\n\n\n\n\n\n\nExplore the interactive charts, summary tables, and player explorer on the Stats Comparison page."
+    "text": "Core Findings\nAs players progress from freshman to senior year:\n\nTotal Scoring: Seniors average 1.78 points per set, compared to 1.28 for freshmen (+39%).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Blocks per set increase from 0.28 (freshmen) to 0.37 (seniors) (+32%).\nFloor Defense: Digs per set increase from 1.20 (freshmen) to 1.53 (seniors) (+28%).\nServing & Setting: Service aces and assists also rise as players take on expanded rotation duties.\n\nExplore the interactive charts, summary tables, and player explorer on the Stats Comparison page."
   },
   {
     "objectID": "story.html",
