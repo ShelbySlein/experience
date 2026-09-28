@@ -49,6 +49,34 @@
     "text": "Core Findings\nAs players progress from freshman to senior year:\n\nTotal Scoring: Seniors average 1.78 points per set, compared to 1.28 for freshmen (+39%).\nAttacking Volume & Efficiency: Seniors average 1.39 kills per set with a .185 average hitting percentage, compared to 0.98 kills per set and .141 hitting percentage for freshmen.\nNet Defense: Blocks per set increase from 0.28 (freshmen) to 0.37 (seniors) (+32%).\nFloor Defense: Digs per set increase from 1.20 (freshmen) to 1.53 (seniors) (+28%).\nServing & Setting: Service aces and assists also rise as players take on expanded rotation duties.\n\nExplore the interactive charts, summary tables, and player explorer on the Stats Comparison page."
   },
   {
+    "objectID": "background.html",
+    "href": "background.html",
+    "title": "Background",
+    "section": "",
+    "text": "In NCAA Division 1 women’s volleyball, athletes face steep competition and rigorous physical demands. A key question in sports analytics is how much court experience and physical maturation across collegiate eligibility translate into measurable statistical gains."
+  },
+  {
+    "objectID": "background.html#project-context",
+    "href": "background.html#project-context",
+    "title": "Background",
+    "section": "",
+    "text": "In NCAA Division 1 women’s volleyball, athletes face steep competition and rigorous physical demands. A key question in sports analytics is how much court experience and physical maturation across collegiate eligibility translate into measurable statistical gains."
+  },
+  {
+    "objectID": "background.html#research-motivation",
+    "href": "background.html#research-motivation",
+    "title": "Background",
+    "section": "Research Motivation",
+    "text": "Research Motivation\nDo upperclassmen (juniors and seniors) consistently outperform underclassmen (freshmen and sophomores), and in which facets of the game—scoring volume, attacking discipline, net defense, or floor defense—is that advantage most pronounced?"
+  },
+  {
+    "objectID": "background.html#data-overview",
+    "href": "background.html#data-overview",
+    "title": "Background",
+    "section": "Data Overview",
+    "text": "Data Overview\n\nSource: Official NCAA Division 1 Women’s Volleyball Statistics\nSeasons: 2020 through 2026\nSample: Over 31,000 individual player-seasons\nClass Standings: Freshmen (Fr), Sophomores (So), Juniors (Jr), and Seniors (Sr)"
+  },
+  {
     "objectID": "analysis.html",
     "href": "analysis.html",
     "title": "Comparing Volleyball Stats by Class Year",
