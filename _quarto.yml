@@ -21,7 +21,7 @@ website:
       - href: analysis.qmd
         text: Stats Comparison
       - href: case-study.qmd
-        text: Case Study
+        text: Player Journey
       - href: about.qmd
         text: About
 

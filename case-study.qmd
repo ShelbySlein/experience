@@ -1,5 +1,5 @@
 ---
-title: "Case Study & Player Journey"
+title: "Player Journey"
 format: html
 ---
 
