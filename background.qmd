@@ -1,0 +1,19 @@
+---
+title: "Background"
+format: html
+---
+
+## Project Context
+
+In NCAA Division 1 women's volleyball, athletes face steep competition and rigorous physical demands. A key question in sports analytics is how much court experience and physical maturation across collegiate eligibility translate into measurable statistical gains.
+
+## Research Motivation
+
+Do upperclassmen (juniors and seniors) consistently outperform underclassmen (freshmen and sophomores), and in which facets of the game—scoring volume, attacking discipline, net defense, or floor defense—is that advantage most pronounced?
+
+## Data Overview
+
+- **Source:** Official NCAA Division 1 Women's Volleyball Statistics
+- **Seasons:** 2020 through 2026
+- **Sample:** Over 31,000 individual player-seasons
+- **Class Standings:** Freshmen (Fr), Sophomores (So), Juniors (Jr), and Seniors (Sr)

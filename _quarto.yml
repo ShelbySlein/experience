@@ -2,6 +2,7 @@ project:
   type: website
   render:
     - index.qmd
+    - background.qmd
     - story.qmd
     - analysis.qmd
     - about.qmd
@@ -12,6 +13,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: background.qmd
+        text: Background
       - href: story.qmd
         text: The Veteran Advantage
       - href: analysis.qmd

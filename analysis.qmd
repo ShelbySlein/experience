@@ -14,7 +14,6 @@ We analyze whether collegiate experience level (Freshman, Sophomore, Junior, Sen
 ```{r}
 #| label: setup
 library(tidyverse)
-library(plotly)
 library(DT)
 
 volleyball <- read_csv("data/ncaa_d1_volleyball_2020_2026.csv", show_col_types = FALSE)
@@ -59,15 +58,18 @@ datatable(class_summary, options = list(dom = 't', paging = FALSE), rownames = F
 
 ## Comparing Key Metrics by Class Year
 
-This interactive chart compares scoring (Points), attacking (Kills), and defending (Digs and Blocks) per set across experience levels.
+This chart compares scoring (Points), attacking (Kills), and defending (Digs and Blocks) per set across experience levels.
 
 ```{r}
 #| label: multi-metric-chart
+#| fig-width: 9
+#| fig-height: 5.5
+#| fig-align: center
 metrics_long <- class_summary |>
   select(`Class Standing`, `Points / Set`, `Kills / Set`, `Digs / Set`, `Blocks / Set`) |>
   pivot_longer(cols = -`Class Standing`, names_to = "Metric", values_to = "Average")
 
-p_bars <- ggplot(metrics_long, aes(x = `Class Standing`, y = Average, fill = `Class Standing`)) +
+ggplot(metrics_long, aes(x = `Class Standing`, y = Average, fill = `Class Standing`)) +
   geom_col(show.legend = FALSE) +
   facet_wrap(~ Metric, scales = "free_y") +
   scale_fill_brewer(palette = "Blues") +
@@ -77,17 +79,18 @@ p_bars <- ggplot(metrics_long, aes(x = `Class Standing`, y = Average, fill = `Cl
     y = "Average Per Set"
   ) +
   theme_minimal()
-
-ggplotly(p_bars)
 ```
 
 ## Distribution of Total Points per Set
 
-Hover over the boxplot below to examine the median, quartiles, and range of total points produced per set by class year.
+The boxplot below illustrates the median, quartiles, and range of total points produced per set by class year.
 
 ```{r}
 #| label: points-boxplot
-p_box <- ggplot(vb_clean, aes(x = class_year, y = points_s, fill = class_year)) +
+#| fig-width: 8
+#| fig-height: 4.5
+#| fig-align: center
+ggplot(vb_clean, aes(x = class_year, y = points_s, fill = class_year)) +
   geom_boxplot(outlier.alpha = 0.2, show.legend = FALSE) +
   scale_fill_brewer(palette = "Blues") +
   coord_cartesian(ylim = c(0, 6)) +
@@ -97,8 +100,6 @@ p_box <- ggplot(vb_clean, aes(x = class_year, y = points_s, fill = class_year)) 
     y = "Points per Set"
   ) +
   theme_minimal()
-
-ggplotly(p_box)
 ```
 
 ## Interactive Player Comparison (Head-to-Head by Class Year)
