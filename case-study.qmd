@@ -1,0 +1,24 @@
+---
+title: "Case Study & Player Journey"
+format: html
+---
+
+## Personal Perspective & Motivation
+
+Over the past few years of watching college volleyball, I have become increasingly interested in the statistics behind the players. Specifically, the way in which experience affects overall production of points over the course of a player's career. Every year there are freshman stars and then there are those players that continue to steadily improve and grow. 
+
+I began to think about how each year there are steady improvements in players’ stats all around. I have played volleyball for most of my life, so, seeing how each rep can make you better seemed to stop once you reached the highest collegiate level in my mind. Before researching this topic, I saw lots in the media about comparison to a player's stats from the previous year to now, how it could be their breakout year, or how they could fall into a slump. So, I began to research if the past years' stats could predict an increase in overall point production per player.
+
+## The Evidence in the Data
+
+Using statistics from the past six seasons from the official NCAA, I began to see an upward trend in how each player can still grow at one of the highest levels. In each category—points per set, kills, errors, and more—there were significant findings that showcased the improvement in each player's game, whether they were a star since freshman year or someone who rarely saw playing time.
+
+## Case Study: Marta Levinska (Arizona State)
+
+In my data, I decided to conduct a case study revolving around one player specifically. Marta Levinska from Arizona State played all four years and was a breakout star in her freshman campaign back in 2020. In her four years, not only did she grow, but she also improved her point production rate by over 12 percent, which is significantly high.
+
+## Impact for Athletes and Coaches
+
+The broad data gathered and case study can be very helpful and reassuring to younger athletes and those already in college. Those athletes that start to doubt the work they put in can now see that there is statistical proof showcasing that the work they put in is working and pushing them to be the best athlete they can be.
+
+Another group that could find interest in this data is the coaches behind these high-level teams. Seeing that even the unranked and lower recruits on a list can be just as effective as the number one recruits in the nation by their sophomore year can throw the entire recruiting process for a loop.

@@ -5,6 +5,7 @@ project:
     - background.qmd
     - story.qmd
     - analysis.qmd
+    - case-study.qmd
     - about.qmd
 
 website:
@@ -19,6 +20,8 @@ website:
         text: The Veteran Advantage
       - href: analysis.qmd
         text: Stats Comparison
+      - href: case-study.qmd
+        text: Case Study
       - href: about.qmd
         text: About
 
