@@ -32,14 +32,14 @@
     "href": "analysis.html#comparing-key-metrics-by-class-year",
     "title": "Comparing Volleyball Stats by Class Year",
     "section": "Comparing Key Metrics by Class Year",
-    "text": "Comparing Key Metrics by Class Year\nThis chart compares scoring (Points), attacking (Kills), and defending (Digs and Blocks) per set across experience levels."
+    "text": "Comparing Key Metrics by Class Year\nThis interactive chart compares scoring (Points), attacking (Kills), and defending (Digs and Blocks) per set across experience levels."
   },
   {
     "objectID": "analysis.html#distribution-of-total-points-per-set",
     "href": "analysis.html#distribution-of-total-points-per-set",
     "title": "Comparing Volleyball Stats by Class Year",
     "section": "Distribution of Total Points per Set",
-    "text": "Distribution of Total Points per Set\nThe boxplot below illustrates the median, quartiles, and range of total points produced per set by class year."
+    "text": "Distribution of Total Points per Set\nHover over the boxplot below to examine the median, quartiles, and range of total points produced per set by class year."
   },
   {
     "objectID": "analysis.html#interactive-player-comparison-head-to-head",
